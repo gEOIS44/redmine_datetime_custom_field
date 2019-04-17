@@ -42,7 +42,7 @@ module ApplicationHelper
   def calendar_for(field_id, showHours=nil)
     include_calendar_headers_tags
     javascript_tag("$(function() {" +
-                       (showHours ? "datetimepickerOptions.timepicker=true; datetimepickerOptions.format='d/m/Y H:i';" : "datetimepickerOptions.timepicker=false;datetimepickerOptions.format='d/m/Y';") +
+                       (showHours ? "datetimepickerOptions.timepicker=true; datetimepickerOptions.format='Y-m-d H:i';" : "datetimepickerOptions.timepicker=false;datetimepickerOptions.format='Y-m-d';") +
                        "datetimepickerCreate('##{field_id}');" +
                        "$('.custom_field_show_hours').click( function(){ " +
                        "if($('##{field_id}').val()=='') return;" +
@@ -70,12 +70,12 @@ module ApplicationHelper
         jquery_locale = l('jquery.locale', :default => current_language.to_s)
         tags << javascript_tag(
             "jQuery.datetimepicker.setLocale('#{jquery_locale}');" +
-                "var datetimepickerOptions={format: 'd/m/Y', dayOfWeekStart: #{start_of_week}," +
+                "var datetimepickerOptions={format: 'Y-m-d', dayOfWeekStart: #{start_of_week}," +
                 "closeOnDateSelect:true," +
                 "id:'datetimepicker'," +
                 "onShow: function( currentDateTime ){" +
                 "if( $('#custom_field_show_hours_yes').length==0 ) return;" +
-                "this.setOptions( { format: ( $('#custom_field_show_hours_yes').prop('checked') ? 'd/m/Y H:i' : 'd/m/Y' )," +
+                "this.setOptions( { format: ( $('#custom_field_show_hours_yes').prop('checked') ? 'Y-m-d H:i' : 'Y-m-d' )," +
                 "timepicker: $('#custom_field_show_hours_yes').prop('checked') } );" +
                 "} };" +
                 "function datetimepickerCreate(id){" +
